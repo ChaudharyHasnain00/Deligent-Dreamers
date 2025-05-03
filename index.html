@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deligent Dreamers</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .coin-select {
+            margin-bottom: 20px;
+        }
+        .address-section {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .address-display {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .copy-button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .send-screenshot-button {
+            padding: 10px 20px;
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deligent Dreamers</h1>
+
+        <div class="coin-select">
+            <label for="coin">کوائن منتخب کریں:</label>
+            <select id="coin">
+                <option value="">منتخب کریں</option>
+                <option value="sidra">Sidra (30 PKR Rate)</option>
+                <option value="pi">Pi</option>
+                <option value="usdt">Tether (USDT)</option>
+            </select>
+        </div>
+
+        <div class="address-section">
+            <h2>وصول کنندہ کا ایڈریس</h2>
+            <div class="address-display" id="address"></div>
+            <button class="copy-button" onclick="copyAddress()">کاپی کریں</button>
+        </div>
+
+        <div>
+            <a href="https://wa.me/message/CSL6FOXML727L1" target="_blank">
+                <button class="send-screenshot-button">اسکرین شاٹ بھیجیں</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const coinSelect = document.getElementById('coin');
+        const addressDisplay = document.getElementById('address');
+        let addresses = {
+            sidra: "0x995a89c9fd2B729857541215E5A405303eA48A08",
+            pi: "YOUR_PI_ADDRESS",
+            usdt: "YOUR_USDT_ADDRESS"
+        };
+
+        coinSelect.addEventListener('change', function() {
+            const selectedCoin = this.value;
+            addressDisplay.textContent = addresses[selectedCoin] || "";
+        });
+
+        function copyAddress() {
+            const addressText = addressDisplay.textContent;
+            if (addressText) {
+                navigator.clipboard.writeText(addressText)
+                    .then(() => {
+                        alert('ایڈریس کاپی ہو گیا!');
+                    })
+                    .catch(err => {
+                        console.error('ایڈریس کاپی کرنے میں ناکامی: ', err);
+                        alert('ایڈریس کاپی کرنے میں مسئلہ پیش آیا۔ براہ کرم اسے دستی طور پر منتخب کر کے کاپی کریں۔');
+                    });
+            } else {
+                alert('کوئی ایڈریس دستیاب نہیں!');
+            }
+        }
+    </script>
+</body>
+</html>
